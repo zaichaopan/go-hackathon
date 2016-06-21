@@ -1,0 +1,171 @@
+﻿@model Riipen_SSD.ViewModels.SingleJudgeCriteriaScoreVM
+<link href="~/Styles/Judge_Participant.css" rel="stylesheet" />
+
+
+@{
+    ViewBag.Title = "team";
+}
+
+
+@section scripts{
+    <script src="~/JavaScript/Judge_Team_form.js"></script>
+    <script src="~/JavaScript/Judge-Participant.js"></script>
+}
+
+
+
+<div class="header header-in-judge-team-score">
+    <div class="judge-team-score">
+        @if (ViewBag.TeamName != null)
+        {
+            <p>Team: &nbsp;&nbsp;<span class="ex-small-title"> @ViewBag.TeamName</span></p>
+                }
+
+                @if (ViewBag.ContestName != null)
+                {
+                    <p>Contest:&nbsp;&nbsp; <span class="ex-small-title">@ViewBag.ContestName</span></p>
+                }
+                @if (ViewBag.ContestName != null)
+                {
+
+            <span>Total Score: &nbsp;&nbsp;</span><span class="yourScore"></span>
+                }
+
+    </div>
+</div>
+
+<div class="validateScoreInput">
+</div>
+
+<div class="judge-participant-wrapper">
+
+
+      @using (Html.BeginForm("EditCriteriaScore", "Judge", FormMethod.Post))
+      {
+        @Html.AntiForgeryToken()
+            <input name="teamID" value="@ViewBag.TeamID" hidden />
+            <input name="contestID" value="@ViewBag.ContestID" hidden />
+            <table class="table">
+                <tr>
+                    <th>
+                        Criteria
+                    </th>
+                    <th>
+                        Description
+                    </th>
+                    <th>
+                        Score
+                    </th>
+                    <th>
+                        <i class="fa fa-pencil" aria-hidden="true"></i>   &nbsp;&nbsp;Comment
+                    </th>
+                </tr>
+
+                @{
+                    var counter = 0;
+                    var name = "";
+                }
+                @foreach (var item in Model.singleCriteriaScoreVMLlist)
+                {
+
+                    <tr>
+                        <td>
+                            @item.CriteriaName
+                        </td>
+
+                        <td>
+                            <div class="text-overflow-multi-line">
+
+                            @item.Description </div>
+                        </td>
+                        <td>
+                            @{
+                                name = "singleJugeCriteriaScoreVM.singleCriteriaScoreVMLlist[";
+                                var checkValue = "";
+                                var scoreName = name + counter.ToString() + "].Score";
+                                var commentName = name + counter.ToString() + "].Comment";
+                                var criteriaIdName = name + counter.ToString() + "].CriteriaID";
+                                var teamIdName = name + counter.ToString() + "].TeamID";
+                                var ScoreID = "Score" + counter.ToString();
+
+                                counter++;
+                            }
+
+
+                            <input name="@criteriaIdName" value="@item.CriteriaID" hidden />
+                            <div style="position:relative" class="star-cb-group">
+                               
+                                @*<span style="float:left">Rotten</span>*@@*<span>Riipe</span>*@<br>
+                                @{ 
+                                    var value = "1";
+                                    if (item.Score != null)
+                                    {
+                                        value = item.Score.ToString();
+                                    }
+                                }
+                                <input name="@scoreName" class="range" type="range"  min="1" max="7" step="1" value="@value" required><span class="side-score">@item.Score</span><br>
+
+                    
+
+                                @*@for (int i = 1; i < 8; i++)
+                                {
+                                    if (item.Score == i)
+                                    {
+                                        checkValue = "checked";
+                                    }
+                                    <div class="scoreDiv" style="float:left">
+                                        <span>@i</span><br />
+
+                                        <input type="radio" name="@scoreName" value="@i" @checkValue class="radioScore" required hidden>
+                                        <i class="fa fa-star-o star" aria-hidden="true" value="@i"></i>
+
+                                    </div>
+                                    checkValue = "";
+                                }*@
+
+                                @*<span>Riipe</span>*@
+                            </div>
+                        </td>
+                        <td>
+                            <textarea name="@commentName" class="form-control">@item.Comment</textarea>
+                        </td>
+                    </tr>}
+            </table>
+
+            <div class="dl-horizontal">
+
+                @{ string PublicFeedback = "singleJugeCriteriaScoreVM.PublicFeedback";
+                    string PrivateFeedback = "singleJugeCriteriaScoreVM.PrivateFeedback";
+                }
+                <div class="form-group">
+                    <label><i class="fa fa-pencil" aria-hidden="true"></i>   &nbsp;&nbsp;Public Feedback</label>
+
+                    <div>
+                        <textarea name=@PublicFeedback class="form-control">@Html.DisplayFor(model => model.PublicFeedback)</textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fa fa-pencil" aria-hidden="true"></i>   &nbsp;&nbsp;Private Feedback</label>
+
+                    <div>
+                        <textarea name=@PrivateFeedback class="form-control">@Html.DisplayFor(model => model.PrivateFeedback)</textarea>
+                    </div>
+                </div>
+
+
+
+            </div>
+            <input class="btn btn-warning btn-sm submit-form" name="SubmitOrSave" type="submit" value="Save" />
+            <input class="btn btn-primary btn-sm submit-form" name="SubmitOrSave" type="submit" value="Submit" />
+                    }
+    </div>
+
+
+
+
+
+
+
+
+

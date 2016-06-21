@@ -1,0 +1,103 @@
+﻿    @import url(http://fonts.googleapis.com/css?family=Roboto);
+    @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    font-family: 'Roboto', 'Helvetica Nueue', sans-serif;
+    font-weight:400
+
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+h2 { 
+	font-family: 'Roboto', 'Helvetica Nueue', sans-serif;
+    font-weight:300
+}
+
+.jumbotron{
+    margin-top:80px;
+    background-image:url("/Images/background.jpg");
+    background-repeat:no-repeat;
+    background-size:cover;
+    height:400px; 
+}	
+
+.jumbotron h1{
+    font-family: 'Roboto', 'Helvetica Nueue', sans-serif;
+    font-weight:300;
+    font-size:36px;
+  
+    font-weight:500;
+    color:white;
+    margin-top:80px;
+
+}
+
+
+.bold{
+  font-weight:500;
+}
+
+
+.create-contest-btn{
+    margin-top:20px;
+}
+
+.search-input-admin{
+    width:200px;
+    display:inline-block;
+    padding:6px;
+}
+
+
+.PageDiv{
+    margin-top:20px;
+
+}
+
+
+
+/*------------------------------ admin pages ---------------------------*/
+.button-group{
+    margin-top:20px;
+    display:block
+}
+
+.publish-contest-btn{
+    margin-top:20px;
+}
+
+.participantTable{
+    margin-top:50px;
+}
+
+caption{
+    font-family:'Roboto', sans-serif;
+    font-weight:300;
+    font-size:22px;
+    line-height: 2em;
+}
+
+.multi-field.criteria-list-item{
+    margin-top:10px;
+}

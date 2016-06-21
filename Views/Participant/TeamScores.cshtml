@@ -1,0 +1,129 @@
+﻿@model Riipen_SSD.ViewModels.ParticipantViewModels.TeamCriteriaVMList
+<link href="~/Styles/Judge_Participant.css" rel="stylesheet" />
+
+@{
+    ViewBag.Title = "TeamScores";
+}
+
+
+@section scripts{
+    <script src="~/JavaScript/Judge_Team_form.js"></script>
+    <script src="~/JavaScript/Judge-Participant.js"></script>
+}
+<link href="~/Styles/ParticipantTeamResponsive.css" rel="stylesheet" />
+
+    <div class="header header-in-judge-team-score">
+        <div class="participant-team-score">
+            @if (ViewBag.TeamName != null)
+            {
+                <p>Team: &nbsp;&nbsp;<span class="ex-small-title"> @ViewBag.TeamName</span></p>
+            }
+
+            @if (ViewBag.ContestName != null)
+            {
+                <p>Contest:&nbsp;&nbsp; <span class="ex-small-title">@ViewBag.ContestName</span></p>
+            }
+
+            @if (ViewBag.TotalScore != null)
+            { 
+                
+                <p>Total score:&nbsp;&nbsp; <span class="ex-small-title">@ViewBag.TotalScore</span><span> / 7</span></p>
+            }
+            else
+            {
+                <p>Total score:&nbsp;&nbsp; <span class="ex-small-title">N/A</span></p>
+            }
+        </div>
+    </div>
+
+
+
+
+<div class="judge-participant-wrapper">
+    <table class="Score">
+        <thead>
+            <tr>
+                <th>
+                    Criteria
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Score
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model.teamCriteriaVMlist)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(item.CriteriaName, "CriteriaDetails", new { teamID = ViewBag.TeamID, contestID = ViewBag.ContestID, criteriaID = item.CriteriaID })
+                    </td>
+
+                    <td>
+                        @item.Description
+                    </td>
+                    <td>
+                        @if (item.Score == null)
+                        {
+                            <span>N/A</span>
+                        }
+                        else
+                        { @item.Score<span> / 7</span>
+
+                        }
+
+                    </td>
+                </tr>}
+        </tbody>
+    </table>
+
+    @if (Model.teamFeedbackVMList.Count() > 0)
+    {
+
+        <table class="table feedback">
+            <tr>
+                <th>
+                    Judge name
+                </th>
+                <th>
+                    Public Feedback
+                </th>
+                @if(ViewBag.YourTeam)
+                {
+                    <th>
+                        Private Feedback
+                    </th>
+
+                }
+            </tr>
+
+            @foreach (var item in Model.teamFeedbackVMList)
+            {
+                <tr>
+                    <td>
+                       @item.JudgeName
+                    </td>
+
+                    <td>
+                       @item.PublicFeedback
+                    </td>   
+                    @if (ViewBag.YourTeam)
+                    {
+                        <td>
+                            @item.PrivateFeedback
+                        </td>
+
+                    }     
+                </tr>
+            }
+        </table>
+
+    }
+
+   
+</div>
+

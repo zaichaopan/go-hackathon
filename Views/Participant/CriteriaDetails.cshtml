@@ -1,0 +1,93 @@
+﻿@model IEnumerable<Riipen_SSD.ViewModels.ParticipantViewModels.CriteriaDetailVM>
+<link href="~/Styles/Judge_Participant.css" rel="stylesheet" />
+<link href="~/Styles/ParticipantDetailsResponsive.css" rel="stylesheet" />
+
+@{
+    ViewBag.Title = "CriteriaDetails";
+}
+
+@section scripts{
+    <script src="~/JavaScript/Judge_Team_form.js"></script>
+    <script src="~/JavaScript/Judge-Participant.js"></script>
+}
+
+
+
+    <div class="header header-in-judge-team-score">
+        <div class="participant-team-score">
+            @if (ViewBag.TeamName != null)
+            {
+                <p>Contest: &nbsp;&nbsp;<span class="ex-small-title"> @ViewBag.ContestName &nbsp;&nbsp;</span></p>
+            }
+
+            @if (ViewBag.TeamName != null)
+            {
+                <p>Team: <span class="ex-small-title">@ViewBag.TeamName &nbsp;&nbsp;</span></p>
+            }
+            @if (ViewBag.CriteriaName != null)
+            {
+                <p>Criteria: <span class="ex-small-title">@ViewBag.CriteriaName</span></p>
+            }
+
+
+            @if (ViewBag.JudgesNotSubmitted != null)
+            {
+
+                <p><span class="ex-small-title"> Waiting for @ViewBag.JudgesNotSubmitted judge </span></p>
+            }
+
+        </div>
+    </div>
+
+
+<div class="judge-participant-wrapper">
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Score)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.JudgeName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Comment)
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+
+                        @if (item.Score == null)
+                        {
+                            <span>N/A</span>
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(modelItem => item.Score) <span> / 7</span>
+    }
+
+</td>
+                    <td class="text-overflow-large">
+                        @Html.DisplayFor(modelItem => item.JudgeName)
+                    </td>
+                    <td>
+                        @if (item.Comment == null)
+                        {
+                            <span>N/A</span>
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(modelItem => item.Comment)
+                        }
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    </div>

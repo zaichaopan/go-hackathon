@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Riipen_SSD.ViewModels.ParticipantViewModels.TeamMemberVM>
+<link href="~/Styles/Judge_Participant.css" rel="stylesheet" />
+@{
+    ViewBag.Title = "GetAllTeamMembersForATeam";
+}
+
+<h2>All members in @ViewBag.TeamName</h2>
+
+<table class="table team-members-table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>@Html.DisplayNameFor(model => model.RiipenUrl)</th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+    
+            @{
+                var url = "N/A";
+
+              
+
+
+
+             }
+            
+            @if (item.RiipenUrl != null && item.RiipenUrl.ToUpper().Contains("HTTP"))
+            {
+                url = item.RiipenUrl;
+            }
+            else
+            {
+
+                url = "http://" + item.RiipenUrl;
+            }
+            <a href="@url">@item.RiipenUrl</a>
+           
+        </td>
+    </tr>
+
+
+}
+
+</table>

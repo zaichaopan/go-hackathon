@@ -1,0 +1,251 @@
+﻿/*judge pages*/
+
+body{
+    margin:auto;
+}
+
+.container-fluid{
+    margin:0px;
+    padding:0px;
+}
+
+.header{
+    background-color:#E7EBF2;
+    padding-bottom:30px;
+    width:inherit;
+    padding:20px 25px 30px 25px;
+    display:block;
+    margin-bottom:30px;
+    
+}
+
+footer{
+    text-align:center;
+}
+
+.judge-participant-wrapper{
+     padding:20px 25px 30px 25px;
+}
+
+
+.PageDiv{
+    margin-top:20px;
+}
+
+.searchForm {
+    margin-top:20px;
+    text-align:center;
+    font-family:'Roboto', sans-serif;
+    font-weight:300;
+    display:block;
+}
+
+.searchIn{
+    font-size:16px;
+    line-height: 2em;
+    display:inline-block
+}
+
+.searchForm form input:focus{
+      outline:none;
+}
+
+.searchForm form input{
+    width:150px;
+    border:none;
+    color:#555;
+    border-bottom: 1px solid #BBB;
+    font-size:14px;
+    background-color:#E7EBF2;
+    height:35px;
+}
+
+.btn-search{
+    border: none;
+    background: #E7EBF2;
+    font-size: 12px;
+    color: #244964;
+    height:35px;
+}
+
+.btn-save{
+    background-color:#F68632;
+    color:white;
+    border:0px;
+    padding:5px 10px;
+}
+
+.judge-team-score{
+    font-size:20px;
+    margin-top:20px;
+    margin-bottom:30px;
+}
+
+.title{
+    font-family:'Roboto', sans-serif;
+    font-weight:300;
+    font-size:22px;
+    line-height: 2em;
+    display:inline-block
+}
+
+.small-title{
+    font-size:20px;
+
+}
+.ex-small-title{
+    font-size:16px;
+   
+}
+
+  @media (min-width: 768px) {
+    .btn-search{
+        font-size:22px
+    }
+
+    .searchIn{
+        font-size:30px;
+    }
+
+    .searchForm form input{
+        font-size:20px;
+        width:200px;
+    }
+
+    .header,.judge-participant-wrapper{
+     padding:20px 65px 30px 65px;
+
+    }
+
+}
+
+.judge-team-score {
+    font-weight: 300;
+      margin-top:10px;
+     margin-bottom:10px;
+}
+ .header-in-judge-team-score{
+     padding-top:10px!important;
+     padding-bottom:10px!important;
+   
+ }
+
+ .star-hover{
+    color:#F58632;
+ }
+     
+
+ .hidden{
+     display:none;
+ }
+
+ .validateScoreInput{
+     margin-top:20px;
+    font-family:'Roboto', sans-serif;
+    font-weight:300;
+    font-size:20px;
+    line-height: 2em;
+    display:block;
+    text-align:center;
+    color:orangered;
+ }
+
+
+    
+  .participant-contest-table tr:nth-child(1){
+          color:#224965;
+        font-weight:bold;
+
+    }
+
+   .participant-contest-table tr:nth-child(1) a {
+
+        color:#224965;
+        font-weight:bold;
+    }
+
+ .side-score{
+    display: inline-block;
+    font-size: 16px;
+    margin-left: 15px;
+ }
+
+ .text-overflow {
+    width: 5em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+
+
+
+ @media only screen and (max-width: 360px), (min-device-width: 380px) and (max-device-width: 400px) {
+
+        table th {
+            display: none;
+        }
+
+
+    table td {
+        display: block;
+        font-size: 120%;
+    }
+
+    tr td:first-child {
+        font-size: 120%;
+        font-weight: bold;
+    }
+
+    .range {
+        width: 250px;
+        border: black;
+    }
+
+
+    textarea {
+        width: 300px!important;
+        height:200px!important;
+        display: inline-block;
+    }
+
+    .side-score {
+        font-size: 120%;
+    }
+
+     .text-overflow-small {
+    width: 8em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+
+    .text-overflow-large {
+    width: 16em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+
+   .text-overflow-multi-line {
+    width: 17em;
+    white-space: normal;
+    text-overflow: ellipsis; 
+}
+
+
+    .team-members-table td{
+        display: inline;
+        border-style: none !important;
+    }
+
+    .team-members-table tr {
+        border-bottom: 1px solid;
+    }
+
+    h2 {
+        font-size:16px;
+        margin-bottom:20px
+
+    }
+}
+

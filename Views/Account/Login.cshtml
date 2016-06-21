@@ -1,0 +1,106 @@
+﻿@using Riipen_SSD.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+}
+
+<h2>@ViewBag.Title</h2>
+<div class="row">
+    @if (ViewBag.errorMessage != null)
+    {
+
+
+        <div class="alert alert-danger">
+            <i class="fa fa-times"></i>
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+             @ViewBag.errorMessage
+        </div>
+    }
+
+    <div class="col-md-8">
+        <section id="loginForm">
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <div class="checkbox">
+                            @Html.CheckBoxFor(m => m.RememberMe)
+                            @Html.LabelFor(m => m.RememberMe)
+                        </div>
+                    </div>
+                </div>           
+                 
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Log in" class="btn btn-default" />
+                    </div>
+                </div>
+                <p>
+                    @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                </p>
+                @* Enable this once you have account confirmation enabled for password reset functionality
+                    <p>
+                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                    </p>*@
+            }
+
+            
+
+        </section>
+    </div>
+    <div class="col-xs-12 col-sm-4 col-md-4 ">
+        <div class="panel panel-default">
+            <div class="panel-heading">Test info</div>
+            <div class="panel-body">
+                <div class="col-xs-12" >
+                    <span style="font-weight:bold"> The admin account</span>
+                       <br>
+                        Username: AdminAccount@gmail.com<br>
+                        Password: Pa$$w0rd<br>
+</div>
+                
+                <div class="col-xs-12" style="margin-top:15px;margin-bottom:15px;">
+                    <span style="font-weight:bold">judge accounts</span><br>
+                    Username: MilesDMcleod@gmail.com<br>
+                    Password: Pa$$w0rd<br>
+                    <br>
+                    Username:Felix.f@live.ca<br>
+                    Password: Pa$$w0rd<br>
+                </div>
+                <br>
+                   
+                <div class="col-xs-12">
+                    <span style="font-weight:bold">
+                        participant accounts</span><br>
+                        Username: milesdmcleod@hotmail.com<br>
+                        Password: Pa$$w0rd<br>
+                        <br>
+                        username: felixisfeng@gmail.com<br>
+                        password: Pa$$w0rd<br>
+</div>
+                </div>
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

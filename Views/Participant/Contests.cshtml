@@ -1,0 +1,143 @@
+﻿@model PagedList.IPagedList<Riipen_SSD.ViewModels.ParticipantViewModels.ContestTeamVM>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Contests";
+}
+<link href="~/Styles/ParticipantContestResponsive.css" rel="stylesheet" />
+<link href="~/Styles/Judge_Participant.css" rel="stylesheet" />
+
+
+@section scripts{
+    <script src="~/JavaScript/Judge-Participant.js"></script>
+
+}
+
+<div class="header">
+  
+    <p class="title">Contest: <span class="small-title">@ViewBag.contestName</span></p><br />
+    <div class="searchForm">
+        @using (Html.BeginForm("Contests", "Participant", FormMethod.Get))
+        {
+            @Html.AntiForgeryToken()
+
+ 
+            <input name="contestID" value="@ViewBag.contestId" hidden />
+            <button type="submit" class="btn-search"><i class="fa fa-search" aria-hidden="true"></i></button>
+            <input type="text" name="searchATeam" value="@ViewBag.searchStringValue" placeholder="Search"><span class="searchIn">&nbsp;in teams</span>
+        } 
+    </div>
+  </div>
+
+<div class="judge-participant-wrapper">
+    <!--show contest result if the conest is finalized-->
+    @if (ViewBag.ContestIsFinalized != null & ViewBag.ContestIsFinalized)
+    {
+        <div class="contest-result-container">
+           @{
+               Html.RenderAction("ContestResults", new { contestID = ViewBag.ContestID });
+           }
+        </div>
+    }
+    
+
+
+    <div class="dropdown" style="margin-top:10px;margin-bottom:10px;float:right">
+        Sort: <button class="btn btn-default btn-sm dropdown-toggle" type="button" id="sortMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            @ViewBag.sortStringValue
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="sortMenu">
+            <li>@Html.ActionLink("Status", "Contests", new { contestID = ViewBag.contestId, searchATeam = ViewBag.searchStringValue, sortTeams = "Status" })</li>
+            <li>@Html.ActionLink("Name", "Contests", new { contestID = ViewBag.contestId, searchATeam = ViewBag.searchStringValue, sortTeams = "Name" })</li>
+        </ul>
+    </div>
+
+    @if (ViewBag.searchStringValue == "")
+    {
+        <div class="title">All teams</div>
+    }
+    else
+    {
+        <div class="title">Results for: @ViewBag.searchStringValue</div>
+        <p>@Html.ActionLink("Get all teams", "Contests", new { contestID = ViewBag.contestId })</p>
+    }
+
+    <table class="participant-contest-table" id="contest_Teams_Table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().TeamName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().Score)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().JudgeNotSubmitted)
+                </th>
+                <th></th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @if (item.Score != null)
+                        {
+                            @Html.ActionLink(item.TeamName, "TeamScores", new { teamID = item.TeamID, contestID = ViewBag.ContestID, yourTeamID = ViewBag.YourTeamID, totalScore = item.Score })
+                        }
+                        else
+                        {
+                            @item.TeamName;
+                        }
+
+
+                    </td>
+                    <td>
+                        @if (item.Score == null)
+                        {
+                            <span>N/A</span>
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(modelItem => item.Score)<span> / 7</span>
+                        }
+
+                    </td>
+                    <td>
+                        @if (item.JudgeNotSubmitted == 0 && item.Score!=null)
+                        {
+                            <span>Final</span>
+                        }
+                        else if(item.JudgeNotSubmitted!=0)
+                        {
+                            <span>Waiting for @Html.DisplayFor(modelItem => item.JudgeNotSubmitted) Judges</span>
+                            <div class="text-overflow-small">
+                                @foreach (var judgename in item.NamesOfUnsubmittedJudges)
+                                {
+                                    <span>@judgename</span><br />
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <span>N/A</span>
+                        }
+                    </td>
+                    <td>
+                        @Html.ActionLink("View team members", "AllTeamMembersForATeam", new { teamID= item.TeamID})
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="PageDiv">
+        <div style="float: right;">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</div>
+        @Html.PagedListPager(Model, page => Url.Action("Contests",
+        new { page, contestID= ViewBag.ContestID,searchATeam = ViewBag.searchStringValue, sortTeam = ViewBag.sortStringValue }))
+    </div>
+
+    </div>
